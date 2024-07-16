@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from schemas import GenerateCodePayload,ChartDataPayload
 from metaData.main import MetaData
 import json
+from featureEngineering import main
 # from LLM.Feature_Engineering.feature_eng import init
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -28,6 +29,9 @@ def fetchFileMetaData(paylaod: GenerateCodePayload):
 @app.post("/performFE")
 def perFormFeatureEngineering(payload:GenerateCodePayload):
     # init(file_path=payload.file_path,query=payload.prompt)
+    file = 'test_df.csv'
+    query = "give the rows with salary greater than 65000"
+    main.performFeatureEngineering(file,payload.prompt)
     return {"message":"fe"}
 
 @app.get("/chart/data")
