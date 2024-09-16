@@ -9,6 +9,8 @@ def runCode(command):
     # Check if there were any errors
     if process.returncode != 0:
         print("Error executing command:", stderr.decode())
+        return stderr.decode()
     else:
         print("Command output:")
         print(stdout.decode())
+        return stdout.decode()
