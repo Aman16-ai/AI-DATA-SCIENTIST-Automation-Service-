@@ -1,7 +1,8 @@
 from .llm import *
 from .executeCode import runCode
 import os
-def performFeatureEngineering(file,query,userId):
+from settings import UPLOAD_DIR
+async def performFeatureEngineering(file,query,userId):
     df = pandas.read_excel(file)
     code = generateCode(query,df,file)
     clearCode = clearGenerateCode(code)

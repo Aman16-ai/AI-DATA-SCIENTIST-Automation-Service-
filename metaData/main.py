@@ -4,10 +4,10 @@ import json
 
 class MetaData:
 
-    def __init__(self,file_path:str):
-        self.file_path = file_path
+    def __init__(self,buffer):
+        # self.file_path = file_path
         try:
-            self.df = pd.read_excel(file_path)
+            self.df = pd.read_excel(buffer)
             # print(self.df.head())
         except Exception as e:
             print(e)
