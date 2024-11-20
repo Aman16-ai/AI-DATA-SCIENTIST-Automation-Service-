@@ -12,12 +12,13 @@ import json
 from settings import UPLOAD_DIR
 import pandas as pd
 from utils.DataFrameUtils import parseDataFrameToJson
+import os
 
 
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://vizforge-cl.netlify.app/"],
+    allow_origins=[os.getenv('CLIENT_ORIGIN_URL','http://localhost:5173')],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,7 +30,7 @@ app.add_middleware(
 async def redis_pool():
     # Redis client bound to pool of connections (auto-reconnecting).
     return asyncio.from_url(
-        "rediss://default:AVNS_3X_MO9rW8S9VmWC8796@redis-381bc3a7-asaxena7531-fba0.a.aivencloud.com:22275", encoding="utf-8", decode_responses=True
+        os.getenv("REDIS_URL"), encoding="utf-8", decode_responses=True
     )
 
 @app.on_event("startup")
